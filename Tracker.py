@@ -1,12 +1,12 @@
 import os
 import threading
-from Utilities import create_socket
+import networkx as nx
 from Peer import Peer
-from Constants import TRACKER_PORT, REPORTS_SOCK_PORT
+from matplotlib import style
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from matplotlib import style
-import networkx as nx
+from Utilities import create_socket
+from Constants import TRACKER_PORT, REPORTS_SOCK_PORT
 
 class Tracker:
   def __init__(self):
@@ -56,11 +56,10 @@ class Tracker:
 
         peer_ports_str = len_peer_ports_str + peer_ports_str
         
-        print("Peer Port Str:" + peer_ports_str)
         peer_sock.send(peer_ports_str.encode("utf-8"))
 
         new_port = peer_sock.recv(6).decode("utf-8")
-        print("New Port: " , new_port)
+        
         self.peer_list.append(int(new_port))
       except KeyboardInterrupt:
         break
@@ -80,7 +79,7 @@ class Tracker:
       try:
         peer_sock, peer_addr = self.reports_sock.accept()
         reported_port = int(peer_sock.recv(5).decode('utf-8'))
-        print("Reported Port: " , reported_port)
+        
         if reported_port in reports:
           reports[reported_port] += 1
         else:

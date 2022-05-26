@@ -1,8 +1,8 @@
 import sys
 import os
+import threading
 from Utilities import create_socket
 from Constants import TRACKER_PORT, REPORTS_SOCK_PORT, malicious_words
-import threading
 
 class Peer:
   def __init__(self, port):
@@ -102,7 +102,6 @@ class Peer:
     #05000
     #<--headers_finished-->
     
-
     """headers + msg"""
     #05000
     #<--headers_finished--> hello world
