@@ -61,7 +61,6 @@ class Peer:
 
         self.total += 1
 
-        #n_recv aur m_recv samjh nahi araha
         if sender_port in self.n_recv:
           self.m_recv[sender_port] += self.is_malicious(msg)
         else:
